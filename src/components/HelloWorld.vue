@@ -1,12 +1,13 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { onMounted, ref } from 'vue';
+const apiUrl = import.meta.env.VITE_API_URL;
 
 const message = ref('Loading...')
 
 
 onMounted(async () => {
   try {
-    const res = await fetch('http://localhost:8000')
+    const res = await fetch(apiUrl)
     const data = await res.json()
     message.value = data.message
   } catch (error) {
