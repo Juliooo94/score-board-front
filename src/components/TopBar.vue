@@ -1,10 +1,13 @@
 <script setup lang="ts">
+import Authentication from './auth/Authentication.vue';
+defineProps({
+  isLoggedIn: Boolean,
+});
 </script>
 <template>
     <div class="top-bar">
         <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/about">About</a></li>
+          <li><Authentication :is-logged-in="isLoggedIn"/></li>
         </ul>
     </div>
 </template>
@@ -12,8 +15,7 @@
 .top-bar {
     display: flex;
     justify-content: space-between; 
-    align-items: center;
-    background-color: lightgray;
+    background-color: rgb(219, 214, 214);
     flex-direction: row-reverse;
     padding-right: $spacing-sm;
 }
