@@ -1,10 +1,28 @@
 <script setup lang="ts">
-import TopBar from './components/TopBar.vue'
+import { onMounted, ref } from 'vue';
+import TopBar from './components/TopBar.vue';
+const apiUrl = import.meta.env.VITE_API_URL;
+const isLoggedIn = ref<boolean>(false);
+
+onMounted(async () => {
+  const res = await fetch(`${apiUrl}/user/me`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "include"
+  })
+  console.log(res)
+  if (res.status == 200) {
+    isLoggedIn.value = true
+  }
+})
+
 </script>
 
 <template>
   <div id="app">
-    <TopBar />
+    <TopBar :is-logged-in="isLoggedIn"/>
     <main class="content">
       <p>Main content goes here.</p>
     </main>
